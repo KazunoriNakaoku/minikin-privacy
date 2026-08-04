@@ -1,7 +1,8 @@
 # ミニマムキングダム — 公開ドキュメント
 
 iOSアプリ「ミニマムキングダム（Minimum Kingdom）」の
-プライバシーポリシーを公開するためのリポジトリです。
+プライバシーポリシーとサポート情報を公開するためのリポジトリです。
 アプリ本体のソースコードは含みません。
 
 - [プライバシーポリシー](https://kazunorinakaoku.github.io/minikin-privacy/)
+- [サポート](https://kazunorinakaoku.github.io/minikin-privacy/support.html)

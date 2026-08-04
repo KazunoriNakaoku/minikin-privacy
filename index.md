@@ -11,6 +11,10 @@ description: ミニマムキングダム（Minimum Kingdom）のプライバシ�
 
 ---
 
+[サポート・よくある質問はこちら](./support.html)
+
+---
+
 ## 日本語
 
 ### 1. はじめに
