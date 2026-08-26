@@ -7,7 +7,7 @@ description: ミニマムキングダム（Minimum Kingdom）のプライバシ�
 
 **ミニマムキングダム（Minimum Kingdom）**
 
-最終更新日: 2026年8月18日
+最終更新日: 2026年8月27日
 
 ---
 
@@ -26,7 +26,7 @@ description: ミニマムキングダム（Minimum Kingdom）のプライバシ�
 
 **氏名・電話番号・住所などの個人情報を入力していただく機能はありません。**
 
-オンライン対戦・友だち対戦をご利用の場合に限り、対戦に必要な情報を
+オンライン対戦・友だち対戦・交流をご利用の場合に限り、必要な情報を
 開発者のサーバー（Google Firebase）で扱います（第4章）。
 **CPU対戦・訓練場だけをお使いの場合、サーバーとの通信は行いません。**
 
@@ -47,7 +47,7 @@ description: ミニマムキングダム（Minimum Kingdom）のプライバシ�
 
 - 匿名の識別子
 - **王国名（表示名）**: 対戦相手の画面に表示されます（第5章）
-- 国家戦闘力（レート）と対戦の記録（対局の手順・勝敗・日時）
+- 国家戦力（レート）と対戦の記録（対局の手順・勝敗・日時）
 - 対戦中の接続状態（在席）
 
 対戦の記録は、不正な操作の検出と問い合わせ対応のために保存します。
@@ -69,6 +69,41 @@ description: ミニマムキングダム（Minimum Kingdom）のプライバシ�
 データを削除できます。ただし**対戦の記録は、対戦相手側の記録でもあるため
 削除の対象になりません**（匿名の識別子のみが残ります）。
 
+#### 交流（ロビーチャット）
+
+「交流」は、利用者どうしが短いメッセージを交わし、対戦を募集できる
+共有の場です。ご利用の際は以下の情報がサーバーへ保存され、**他の利用者の
+画面に表示されます**。
+
+- 投稿の本文・王国名・アイコン・投稿時刻・国家戦力
+- 対戦募集の場合は、募集の一言と募集の状態（募集中・締切など）
+
+投稿は**24時間で自動的に削除**されます（最新100件のみ保持）。削除された
+投稿についても、通報への対応のため本文の写しをサーバー内部で最長7日間
+保存します（他の利用者には表示されません）。投稿が通報された場合は、
+本文の写しを通報記録として対応の完了まで保存し、完了後に削除します。
+投稿そのものに利用者の識別子（uid）は含まれません（uid の代わりに、
+投稿者ごとに固定の匿名の印を含みます）。
+
+不適切な投稿への対策として、入力時のフィルタ・投稿の長押しからの通報・
+通報した相手の投稿の非表示・運営による投稿の削除を行っています。
+初回利用時に利用ルールへの同意をお願いしています。
+
+#### お知らせ（プッシュ通知）
+
+対戦相手を募集すると、アプリを閉じているあいだに申し込みが届いたことを
+お知らせできます。このために、**端末ごとの通知用の識別子**
+（Firebase Cloud Messaging のトークン）をサーバーへ保存します。
+
+- 通知の許可は**募集を出すときにお尋ねします**。許可しなくても募集は
+  できます（お知らせが届かないだけです）。端末の設定からいつでも
+  変更できます
+- お知らせの文面に**王国名やメッセージの内容は含めません**
+  （「対戦の申し込みが来ています」の固定の文です）
+- 通知用の識別子は、退会のときに削除します。また30日間更新のないものは
+  自動的に削除します
+- 広告・宣伝の目的では利用しません
+
 ### 5. 王国名（表示名）について
 
 王国名は利用者が入力する表示名で、**対戦相手の画面に表示されます。**
@@ -79,7 +114,7 @@ description: ミニマムキングダム（Minimum Kingdom）のプライバシ�
 - 入力時のフィルタ（不適切な語を含む名前は登録できません）
 - 対戦画面・結果画面からの**通報**（通報された内容と、通報された時点の
   双方の表示名を保存します）
-- 通報した相手とは、以後マッチングされません
+- 通報した相手とは、以後ランダムマッチングされません
 - 運営が不適切と判断した表示名は、予告なく既定の名前へ変更することがあります
 
 通報に関する記録は、対応と再発防止のため一定期間保存します。
@@ -128,7 +163,7 @@ iOS では、初回起動時にトラッキングの許可を求めるダイア�
 
 本ポリシーに関するお問い合わせは、以下までご連絡ください。
 
-kazunorinakaoku@gmail.com
+minimumkingdom.info@gmail.com
 
 ---
 
@@ -144,8 +179,8 @@ This policy explains how information is handled in Minimum Kingdom
 **The App never asks you to enter your name, phone number, address, or
 similar personal information.**
 
-Only when you use online or friend matches does the App store the
-information needed for matchmaking on the developer's servers
+Only when you use online matches, friend matches, or Diplomacy does the
+App store the necessary information on the developer's servers
 (Google Firebase; see Section 4). **If you only play against the CPU or
 use the training area, the App does not communicate with any server.**
 
@@ -192,6 +227,43 @@ your data on the server. **Match records are not deleted**, because they
 are also the records of your opponents; only the anonymous identifier
 remains in them.
 
+#### Exchange (lobby chat)
+
+"Exchange" is a shared space where players exchange short messages and
+recruit opponents. When you use it, the following is stored on the server
+and **shown to other players**:
+
+- the message text, your kingdom name, your icon, the posting time, and
+  your national power (rating)
+- for a recruit post, the recruiting note and its state (open, closed)
+
+Posts are **automatically deleted after 24 hours** (only the latest 100
+are kept). A server-internal copy of each post's text is retained for up
+to 7 days to handle reports (it is not shown to other players). If a
+post is reported, a copy of its text is kept in the report record until
+the report has been handled, after which it is deleted. Posts themselves
+do not contain your identifier (uid); they contain a fixed anonymous
+marker per poster instead.
+
+Safeguards for inappropriate posts: input filtering, long-press
+reporting, hiding of posts from players you reported, and operator-side
+deletion. You are asked to agree to the usage rules on first use.
+
+#### Push notifications
+
+When you recruit an opponent, we can notify you that someone applied
+while the app is closed. For this purpose a **per-device notification
+identifier** (a Firebase Cloud Messaging token) is stored on the server.
+
+- Permission is requested **when you post a recruitment**. You can post
+  without granting it (you simply will not be notified), and you can
+  change it any time in your device settings
+- The notification text contains **no kingdom name and no message
+  content** (it is the fixed text "対戦の申し込みが来ています")
+- The identifier is deleted when you delete your account, and any
+  identifier not refreshed for 30 days is removed automatically
+- It is never used for advertising or promotion.
+
 ### 5. Kingdom name (display name)
 
 Your kingdom name is a display name you enter, and it **is shown to your
@@ -203,7 +275,7 @@ Safeguards for inappropriate display names:
 - input filtering (names containing inappropriate words cannot be saved)
 - **reporting** from the match and result screens (a report stores both
   players' display names at the time of the report)
-- you are never matched again with someone you reported
+- you are excluded from random matchmaking with someone you reported
 - display names judged inappropriate may be reset to a default name
   without prior notice
 
@@ -254,4 +326,4 @@ the "last updated" date above will be revised.
 
 For questions about this policy, please contact:
 
-kazunorinakaoku@gmail.com
+minimumkingdom.info@gmail.com
