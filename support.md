@@ -15,7 +15,7 @@ description: ミニマムキングダム（Minimum Kingdom）のサポートペ�
 
 ご質問・ご要望・不具合のご報告は、こちらまでご連絡ください。
 
-**kazunorinakaoku@gmail.com**
+**minimumkingdom.info@gmail.com**
 
 不具合のご報告では、次の情報を添えていただけると調査が早く進みます。
 
@@ -70,7 +70,7 @@ description: ミニマムキングダム（Minimum Kingdom）のサポートペ�
 
 For questions, requests, or bug reports, please contact:
 
-**kazunorinakaoku@gmail.com**
+**minimumkingdom.info@gmail.com**
 
 When reporting a bug, the following details help us investigate faster:
 
