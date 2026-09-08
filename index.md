@@ -7,7 +7,7 @@ description: ミニマムキングダム（Minimum Kingdom）のプライバシ�
 
 **ミニマムキングダム（Minimum Kingdom）**
 
-最終更新日: 2026年8月27日
+最終更新日: 2026年9月1日
 
 ---
 
@@ -26,9 +26,10 @@ description: ミニマムキングダム（Minimum Kingdom）のプライバシ�
 
 **氏名・電話番号・住所などの個人情報を入力していただく機能はありません。**
 
-オンライン対戦・友だち対戦・交流をご利用の場合に限り、必要な情報を
-開発者のサーバー（Google Firebase）で扱います（第4章）。
-**CPU対戦・訓練場だけをお使いの場合、サーバーとの通信は行いません。**
+**はじめの物語を終えて王国名を決めると**、その王国名と匿名の識別子を
+開発者のサーバー（Google Firebase）で扱います（第4章）。オンライン対戦・
+友だち対戦・交流をご利用の場合は、さらに必要な情報を扱います。
+**はじめの物語を終える前は、サーバーとの通信は行いません。**
 
 ### 3. 端末内に保存される情報
 
@@ -39,14 +40,17 @@ description: ミニマムキングダム（Minimum Kingdom）のプライバシ�
 - チーム編成の内容
 - 王国名（表示名）とアプリの初回設定が済んだかどうかの印
 
-### 4. オンライン対戦・友だち対戦で扱う情報
+### 4. サーバーで扱う情報（王国名・オンライン対戦・友だち対戦）
 
-対戦機能を初めてご利用になるとき、利用者を識別するための**匿名の識別子**
-（ランダムな文字列。氏名やメールアドレスとは結び付きません）が自動的に
-作られ、以下の情報とともにサーバーへ保存されます。
+**はじめの物語を終えて王国名を決めたとき**、または対戦機能を初めて
+ご利用になるとき、利用者を識別するための**匿名の識別子**（ランダムな
+文字列。氏名やメールアドレスとは結び付きません）が自動的に作られ、
+以下の情報とともにサーバーへ保存されます。
 
 - 匿名の識別子
 - **王国名（表示名）**: 対戦相手の画面に表示されます（第5章）
+- **コインの残高と、ログインボーナスを受け取った日付**（受け取りの重複を
+  防ぐために保存します。30日を過ぎたものは自動的に消えます）
 - 国家戦力（レート）と対戦の記録（対局の手順・勝敗・日時）
 - 対戦中の接続状態（在席）
 
@@ -179,10 +183,11 @@ This policy explains how information is handled in Minimum Kingdom
 **The App never asks you to enter your name, phone number, address, or
 similar personal information.**
 
-Only when you use online matches, friend matches, or Diplomacy does the
-App store the necessary information on the developer's servers
-(Google Firebase; see Section 4). **If you only play against the CPU or
-use the training area, the App does not communicate with any server.**
+**Once you finish the opening story and choose your kingdom name**, that
+kingdom name and an anonymous identifier are stored on the developer's
+servers (Google Firebase; see Section 4). Using online matches, friend
+matches, or Diplomacy stores further information. **Before you finish the
+opening story, the App does not communicate with any server.**
 
 ### 3. Information stored on your device
 
@@ -194,15 +199,19 @@ delete the App.
 - Your team composition
 - Your kingdom name (display name) and whether initial setup is complete
 
-### 4. Information used for online and friend matches
+### 4. Information stored on the server (kingdom name and matches)
 
-The first time you use a match feature, an **anonymous identifier**
-(a random string, not linked to your name or email) is created and stored
-on the server together with:
+**When you finish the opening story and choose your kingdom name**, or the
+first time you use a match feature, an **anonymous identifier** (a random
+string, not linked to your name or email) is created and stored on the
+server together with:
 
 - the anonymous identifier
 - your **kingdom name (display name)**, which is shown to your opponent
   (see Section 5)
+- your **coin balance and the dates you received the daily login bonus**
+  (stored to prevent duplicate awards; entries older than 30 days are
+  removed automatically)
 - your rating and match records (moves, results, timestamps)
 - your connection status during a match
 
