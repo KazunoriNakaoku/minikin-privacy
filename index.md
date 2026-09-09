@@ -34,13 +34,16 @@ description: ミニマムキングダム（Minimum Kingdom）のプライバシ�
 ### 3. 端末内に保存される情報
 
 以下は利用者の端末内に保存され、アプリを削除すると消去されます。
-**ただしアカウントを連携している場合は、引き継ぎのためサーバーにも
-保存されます**（第4章「アカウント連携」）。
 
 - CPU対戦の勝利回数（難易度ごと）
 - 出陣コスト（スタミナ）の残量と回復時刻
 - チーム編成の内容
+- ユニットの解放の進捗
 - 王国名（表示名）とアプリの初回設定が済んだかどうかの印
+
+**アカウントを連携している場合は、上のうち初回設定の印を除く4つが、
+引き継ぎのためサーバーにも保存されます**（第4章「アカウント連携」）。
+なお王国名は、連携の有無にかかわらずサーバーに保存されます（第4章）。
 
 ### 4. サーバーで扱う情報（王国名・オンライン対戦・友だち対戦）
 
@@ -53,8 +56,9 @@ description: ミニマムキングダム（Minimum Kingdom）のプライバシ�
 - **王国名（表示名）**: 対戦相手の画面に表示されます（第5章）
 - **コインの残高と、ログインボーナスを受け取った日付**（受け取りの重複を
   防ぐために保存します。30日を過ぎたものは自動的に消えます）
-- **獲得したアイコン・フレーム・ユニットと、ガチャを引いた回数**
-  （重複の判定と、引けるものが残っているかの表示に使います）
+- **獲得したアイコン・フレーム・ユニット**（重複の判定と、引けるものが
+  残っているかの表示に使います）
+- **ガチャを引いた回数**（不具合の調査と統計のために記録します）
 - 国家戦力（レート）と対戦の記録（対局の手順・勝敗・日時）
 - 対戦中の接続状態（在席）
 
@@ -77,7 +81,8 @@ description: ミニマムキングダム（Minimum Kingdom）のプライバシ�
 
 「その他」→「アカウント設定」→「退会」から、アカウントとサーバー上の
 データを削除できます。ただし**対戦の記録は、対戦相手側の記録でもあるため
-削除の対象になりません**（匿名の識別子のみが残ります）。
+削除の対象になりません**（匿名の識別子のみが残ります）。また、退会の直後に
+残高が作り直されるのを防ぐため、**退会した時刻の記録**が残ります。
 
 #### 交流（ロビーチャット）
 
@@ -86,15 +91,19 @@ description: ミニマムキングダム（Minimum Kingdom）のプライバシ�
 画面に表示されます**。
 
 - 投稿の本文・王国名・アイコン・投稿時刻・国家戦力
-- 対戦募集の場合は、募集の一言・募集の状態（募集中・締切など）・
-  **チーム編成の内容**
+- 対戦募集の場合は、募集の一言と募集の状態（募集中・締切など）
+- 募集に応募した場合は、王国名と国家戦力が**募集した方の画面に**表示されます
+
+対戦募集と応募には**チーム編成の内容**も保存されますが、一覧には表示されず、
+対戦が成立した時点で相手に渡ります（通常の対戦と同じ扱いです）。
 
 投稿は**24時間で自動的に削除**されます（最新100件のみ保持）。削除された
 投稿についても、通報への対応のため本文の写しをサーバー内部で最長7日間
 保存します（他の利用者には表示されません）。投稿が通報された場合は、
 本文の写しを通報記録として対応の完了まで保存し、完了後に削除します。
 投稿そのものに利用者の識別子（uid）は含まれません（uid の代わりに、
-投稿者ごとに固定の匿名の印を含みます）。
+投稿者ごとに固定の匿名の印を含みます）。**通報対応のための写しには uid を
+含みます**（他の利用者には表示されません）。
 
 不適切な投稿への対策として、入力時のフィルタ・投稿の長押しからの通報・
 通報した相手の投稿の非表示・運営による投稿の削除を行っています。
@@ -201,13 +210,18 @@ opening story, the App does not communicate with any server.**
 ### 3. Information stored on your device
 
 The following is stored on your device and removed when you delete the
-App. **If you have linked an account, it is also stored on the server**
-so that it can be restored (see "Account linking" in Section 4).
+App.
 
 - Number of wins against the CPU (per difficulty)
 - Remaining deployment cost (stamina) and its recovery time
 - Your team composition
+- Your unit unlock progress
 - Your kingdom name (display name) and whether initial setup is complete
+
+**If you have linked an account, the four items above (all except the
+initial-setup flag) are also stored on the server** so that they can be
+restored (see "Account linking" in Section 4). Your kingdom name is
+stored on the server whether or not you link an account (see Section 4).
 
 ### 4. Information stored on the server (kingdom name and matches)
 
@@ -222,9 +236,10 @@ server together with:
 - your **coin balance and the dates you received the daily login bonus**
   (stored to prevent duplicate awards; entries older than 30 days are
   removed automatically)
-- the **icons, frames, and units you have obtained, and the number of
-  gacha draws you have made** (used to detect duplicates and to show
-  whether anything is left to draw)
+- the **icons, frames, and units you have obtained** (used to detect
+  duplicates and to show whether anything is left to draw)
+- the **number of gacha draws you have made** (recorded for
+  troubleshooting and statistics)
 - your rating and match records (moves, results, timestamps)
 - your connection status during a match
 
@@ -250,7 +265,8 @@ advertising or promotion.
 From "その他" → "アカウント設定" → "退会" you can delete your account and
 your data on the server. **Match records are not deleted**, because they
 are also the records of your opponents; only the anonymous identifier
-remains in them.
+remains in them. A record of **when you deleted your account** is also
+kept, to prevent your balance from being recreated immediately after.
 
 #### Exchange (lobby chat)
 
@@ -260,8 +276,13 @@ and **shown to other players**:
 
 - the message text, your kingdom name, your icon, the posting time, and
   your national power (rating)
-- for a recruit post, the recruiting note, its state (open, closed), and
-  your **team composition**
+- for a recruit post, the recruiting note and its state (open, closed)
+- if you apply to a recruit post, your kingdom name and rating are shown
+  **to the player who posted it**
+
+Recruit posts and applications also store your **team composition**. It is
+not shown in the lobby; it reaches your opponent when the match starts,
+just as in an ordinary match.
 
 Posts are **automatically deleted after 24 hours** (only the latest 100
 are kept). A server-internal copy of each post's text is retained for up
@@ -269,7 +290,8 @@ to 7 days to handle reports (it is not shown to other players). If a
 post is reported, a copy of its text is kept in the report record until
 the report has been handled, after which it is deleted. Posts themselves
 do not contain your identifier (uid); they contain a fixed anonymous
-marker per poster instead.
+marker per poster instead. **The internal copy kept for handling reports
+does contain the uid** (it is not shown to other players).
 
 Safeguards for inappropriate posts: input filtering, long-press
 reporting, hiding of posts from players you reported, and operator-side
