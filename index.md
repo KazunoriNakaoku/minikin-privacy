@@ -7,7 +7,7 @@ description: ミニマムキングダム（Minimum Kingdom）のプライバシ�
 
 **ミニマムキングダム（Minimum Kingdom）**
 
-最終更新日: 2026年9月1日
+最終更新日: 2026年9月9日
 
 ---
 
@@ -33,7 +33,9 @@ description: ミニマムキングダム（Minimum Kingdom）のプライバシ�
 
 ### 3. 端末内に保存される情報
 
-以下は利用者の端末内にのみ保存されます。アプリを削除すると消去されます。
+以下は利用者の端末内に保存され、アプリを削除すると消去されます。
+**ただしアカウントを連携している場合は、引き継ぎのためサーバーにも
+保存されます**（第4章「アカウント連携」）。
 
 - CPU対戦の勝利回数（難易度ごと）
 - 出陣コスト（スタミナ）の残量と回復時刻
@@ -51,6 +53,8 @@ description: ミニマムキングダム（Minimum Kingdom）のプライバシ�
 - **王国名（表示名）**: 対戦相手の画面に表示されます（第5章）
 - **コインの残高と、ログインボーナスを受け取った日付**（受け取りの重複を
   防ぐために保存します。30日を過ぎたものは自動的に消えます）
+- **獲得したアイコン・フレーム・ユニットと、ガチャを引いた回数**
+  （重複の判定と、引けるものが残っているかの表示に使います）
 - 国家戦力（レート）と対戦の記録（対局の手順・勝敗・日時）
 - 対戦中の接続状態（在席）
 
@@ -63,7 +67,9 @@ description: ミニマムキングダム（Minimum Kingdom）のプライバシ�
 **連携は任意で、行わなくてもすべての機能をご利用いただけます。**
 
 連携すると、認証サービス（Firebase Authentication）が Apple / Google から
-受け取った識別子とメールアドレスを保存します。Apple の
+受け取った識別子とメールアドレスを保存します。あわせて、**第3章に挙げた
+端末内のデータ（CPU対戦の勝利回数・スタミナ・チーム編成・ユニットの解放の
+進捗）と連携した日時**を、引き継ぎのためサーバーへ保存します。Apple の
 「メールを非公開」をお使いの場合、開発者に届くのは転送用のアドレスのみです。
 メールアドレスを広告・宣伝の目的で利用することはありません。
 
@@ -80,7 +86,8 @@ description: ミニマムキングダム（Minimum Kingdom）のプライバシ�
 画面に表示されます**。
 
 - 投稿の本文・王国名・アイコン・投稿時刻・国家戦力
-- 対戦募集の場合は、募集の一言と募集の状態（募集中・締切など）
+- 対戦募集の場合は、募集の一言・募集の状態（募集中・締切など）・
+  **チーム編成の内容**
 
 投稿は**24時間で自動的に削除**されます（最新100件のみ保持）。削除された
 投稿についても、通報への対応のため本文の写しをサーバー内部で最長7日間
@@ -110,7 +117,9 @@ description: ミニマムキングダム（Minimum Kingdom）のプライバシ�
 
 ### 5. 王国名（表示名）について
 
-王国名は利用者が入力する表示名で、**対戦相手の画面に表示されます。**
+王国名は利用者が入力する表示名で、**対戦相手の画面と、ランキングに
+表示されます。** ランキングには**王国名・国家戦力（レート）・チーム編成**が
+載り、ログインしている他の利用者が見られます。
 本名や連絡先など、他人に知られたくない情報は入力しないでください。
 
 不適切な表示名への対策として、以下を行っています。
@@ -191,8 +200,9 @@ opening story, the App does not communicate with any server.**
 
 ### 3. Information stored on your device
 
-The following is stored only on your device. It is removed when you
-delete the App.
+The following is stored on your device and removed when you delete the
+App. **If you have linked an account, it is also stored on the server**
+so that it can be restored (see "Account linking" in Section 4).
 
 - Number of wins against the CPU (per difficulty)
 - Remaining deployment cost (stamina) and its recovery time
@@ -212,6 +222,9 @@ server together with:
 - your **coin balance and the dates you received the daily login bonus**
   (stored to prevent duplicate awards; entries older than 30 days are
   removed automatically)
+- the **icons, frames, and units you have obtained, and the number of
+  gacha draws you have made** (used to detect duplicates and to show
+  whether anything is left to draw)
 - your rating and match records (moves, results, timestamps)
 - your connection status during a match
 
@@ -225,8 +238,11 @@ that your data can be restored on a new device or reinstall.
 
 If you link an account, the authentication service (Firebase
 Authentication) stores the identifier and email address it receives from
-Apple or Google. If you use Apple's "Hide My Email", only the relay
-address is available to the developer. Email addresses are never used for
+Apple or Google. The on-device data listed in Section 3 (CPU win counts,
+stamina, team composition, unit unlock progress) and the time you linked
+are also stored on the server so that they can be restored. If you use
+Apple's "Hide My Email", only the relay address is available to the
+developer. Email addresses are never used for
 advertising or promotion.
 
 #### Account deletion
@@ -244,7 +260,8 @@ and **shown to other players**:
 
 - the message text, your kingdom name, your icon, the posting time, and
   your national power (rating)
-- for a recruit post, the recruiting note and its state (open, closed)
+- for a recruit post, the recruiting note, its state (open, closed), and
+  your **team composition**
 
 Posts are **automatically deleted after 24 hours** (only the latest 100
 are kept). A server-internal copy of each post's text is retained for up
@@ -276,8 +293,10 @@ identifier** (a Firebase Cloud Messaging token) is stored on the server.
 ### 5. Kingdom name (display name)
 
 Your kingdom name is a display name you enter, and it **is shown to your
-opponents.** Please do not enter your real name, contact details, or any
-other information you do not want others to see.
+opponents and in the rankings.** The rankings show your **kingdom name,
+rating, and team composition** to other signed-in players. Please do not
+enter your real name, contact details, or any other information you do
+not want others to see.
 
 Safeguards for inappropriate display names:
 
