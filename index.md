@@ -107,13 +107,14 @@ Google のサービス（Firebase・AdMob）は、その仕組み上、端末ご
 - 出陣コスト（スタミナ）が足りずに遊べなかった回数
 - ランク戦が成立した・決着した・途中で終わった回数（終わった理由の内訳）
 - そのとき動いていたアプリのバージョン
+- その日に最後に記録した時刻（同じ日の送り直しを見分けるために使います）
 
 **次のものは含みません。** 端末の識別子・広告識別子・機種・OS のバージョン・
 位置情報・画面ごとの滞在時間・押したボタンの種類・盤面の操作・王国名・
-チャットの本文。回数以外のものは送っていません。
+チャットの本文。**上に挙げたもの以外は送っていません。**
 
 **広告や宣伝には利用せず、第三者へ提供することもありません。** また、
-**この集計だけを止める設定はありません**（回数以外を含まないため、
+**この集計だけを止める設定はありません**（上に挙げたもの以外を含まないため、
 個別の停止設定を設けていません）。
 
 保存期間は次のとおりです。
@@ -358,15 +359,16 @@ Only the following counts are sent:
 - how many ranked matches were made, finished, and ended early (with the
   reason)
 - the App version that was running
+- the time you were last recorded that day (used to tell repeat sends apart)
 
 **The following are never included**: device identifiers, advertising
 identifiers, device model, OS version, location, time spent on any screen,
 which buttons you pressed, board actions, your kingdom name, or chat text.
-Nothing beyond the counts above is sent.
+**Nothing beyond the items listed above is sent.**
 
 **These statistics are never used for advertising or promotion, and are
 never shared with third parties.** There is **no separate setting to turn
-them off** (they contain nothing beyond the counts above).
+them off** (they contain nothing beyond the items listed above).
 
 Retention:
 
