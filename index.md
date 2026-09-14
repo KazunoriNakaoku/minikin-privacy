@@ -7,7 +7,7 @@ description: ミニマムキングダム（Minimum Kingdom）のプライバシ�
 
 **ミニマムキングダム（Minimum Kingdom）**
 
-最終更新日: 2026年9月14日
+最終更新日: 2026年9月15日
 
 ---
 
@@ -54,6 +54,10 @@ Google のサービス（Firebase・AdMob）は、その仕組み上、端末ご
 これらはアプリを動かすために必要な通信で、個別に停止する設定はありません。
 広告の表示内容は第6章の方法で変更できます。
 
+**これとは別に、王国名を決めたあとは、アプリの使われ方の大まかな集計を
+送ります**（第4章「利用状況の集計」）。アカウント連携の有無にかかわらず
+送られます。
+
 ### 3. 端末内に保存される情報
 
 以下は利用者の端末内に保存され、アプリを削除すると消去されます。
@@ -87,6 +91,42 @@ Google のサービス（Firebase・AdMob）は、その仕組み上、端末ご
 
 対戦の記録は、不正な操作の検出と問い合わせ対応のために保存します。
 
+#### 利用状況の集計
+
+アプリのどの機能が使われているか、どこで詰まっているかを知り、改善に
+役立てるため、**日付ごとの大まかな回数**をサーバーへ送ります。**王国名を
+決めて匿名の識別子ができたあとに限り**、その識別子と結び付けて保存します。
+
+送るのは次の回数だけです。
+
+- アプリを開いた回数
+- CPU対戦を始めた・勝った・決着した回数（難易度ごと）
+- 合言葉対戦に入った回数
+- 交流を開いた回数・発言した回数
+- 編成を開いた回数
+- 出陣コスト（スタミナ）が足りずに遊べなかった回数
+- ランク戦が成立した・決着した・途中で終わった回数（終わった理由の内訳）
+- そのとき動いていたアプリのバージョン
+
+**次のものは含みません。** 端末の識別子・広告識別子・機種・OS のバージョン・
+位置情報・画面ごとの滞在時間・押したボタンの種類・盤面の操作・王国名・
+チャットの本文。回数以外のものは送っていません。
+
+**広告や宣伝には利用せず、第三者へ提供することもありません。** また、
+**この集計だけを止める設定はありません**（回数以外を含まないため、
+個別の停止設定を設けていません）。
+
+保存期間は次のとおりです。
+
+- **日付ごとの回数は90日で自動的に削除**されます
+- **月ごとの人数の集計**（「その月に初めて記録が届いた人数」「その月に
+  遊んだ人数」など、**個人と結び付かない数だけ**）は期限を定めずに残します
+- **「初めて記録が届いた日」と「どの機能を使ったことがあるかの印」**は、
+  同じ人を二重に数えないために必要なので、**退会まで残します**
+
+退会（下記）では、日付ごとの回数・初めて記録が届いた日・使ったことがあるかの
+印を**すべて削除**します。月ごとの人数の集計は個人と結び付かないため残ります。
+
 #### アカウント連携（任意）
 
 「その他」→「アカウント設定」から、Apple または Google のアカウントを
@@ -103,7 +143,9 @@ Google のサービス（Firebase・AdMob）は、その仕組み上、端末ご
 #### 退会（データの削除）
 
 「その他」→「アカウント設定」→「退会」から、アカウントとサーバー上の
-データを削除できます。ただし**対戦の記録は、対戦相手側の記録でもあるため
+データを削除できます。上記の「利用状況の集計」のうち、個人と結び付くもの
+（日付ごとの回数・初めて記録が届いた日・使ったことがあるかの印）も
+このとき削除されます。ただし**対戦の記録は、対戦相手側の記録でもあるため
 削除の対象になりません**（匿名の識別子のみが残ります）。また、退会の直後に
 残高が作り直されるのを防ぐため、**退会した時刻の記録**が残ります。
 
@@ -255,6 +297,10 @@ that it can reach the server (the request carries no data and no identifier).
 These connections are required for the App to work and cannot be turned off
 individually. What the ads show can be changed as described in Section 6.
 
+**Separately, once you have chosen a kingdom name, the App sends a coarse
+count of how it is used** (see "Usage statistics" in Section 4). This is
+sent whether or not you link an account.
+
 ### 3. Information stored on your device
 
 The following is stored on your device and removed when you delete the
@@ -293,6 +339,49 @@ server together with:
 
 Match records are retained to detect cheating and to respond to inquiries.
 
+#### Usage statistics
+
+To learn which features are used and where players get stuck, the App sends
+**coarse per-day counts** to the server. They are stored against your
+anonymous identifier, and **only after you have chosen a kingdom name** and
+that identifier exists.
+
+Only the following counts are sent:
+
+- how many times you opened the App
+- how many CPU matches you started, won, and finished (by difficulty)
+- how many passphrase matches you entered
+- how many times you opened Exchange and how many messages you posted there
+- how many times you opened the team screen
+- how many times you could not play because your deployment cost (stamina)
+  had run out
+- how many ranked matches were made, finished, and ended early (with the
+  reason)
+- the App version that was running
+
+**The following are never included**: device identifiers, advertising
+identifiers, device model, OS version, location, time spent on any screen,
+which buttons you pressed, board actions, your kingdom name, or chat text.
+Nothing beyond the counts above is sent.
+
+**These statistics are never used for advertising or promotion, and are
+never shared with third parties.** There is **no separate setting to turn
+them off** (they contain nothing beyond the counts above).
+
+Retention:
+
+- **per-day counts are deleted automatically after 90 days**
+- **monthly totals of people** (such as how many people were first recorded
+  in a month, or played in it) are kept indefinitely — these are **counts
+  only and are not linked to an individual**
+- **the date you were first recorded, and flags for which features you have
+  ever used**, are needed so that the same person is not counted twice, and
+  are **kept until you delete your account**
+
+Deleting your account (below) removes **all** of the per-day counts, the
+first-recorded date, and the feature flags. Monthly totals of people remain,
+as they are not linked to an individual.
+
 #### Account linking (optional)
 
 From "その他" → "アカウント設定" you may link an Apple or Google account so
@@ -311,7 +400,10 @@ advertising or promotion.
 #### Account deletion
 
 From "その他" → "アカウント設定" → "退会" you can delete your account and
-your data on the server. **Match records are not deleted**, because they
+your data on the server. This also removes the parts of the usage
+statistics above that are linked to you (the per-day counts, the
+first-recorded date, and the feature flags). **Match records are not
+deleted**, because they
 are also the records of your opponents; only the anonymous identifier
 remains in them. A record of **when you deleted your account** is also
 kept, to prevent your balance from being recreated immediately after.
