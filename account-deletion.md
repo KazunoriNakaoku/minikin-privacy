@@ -44,12 +44,16 @@ description: ミニマムキングダム（Minimum Kingdom）のアカウント�
 
 | データ | 残る理由 | 保存期間 |
 |---|---|---|
-| **人どうしのランク戦の記録**（対戦した両者の識別子と、対戦時に表示された王国名・使った編成） | 対戦相手の記録でもあり、通報の確認に使うため | 期限なし |
+| **人どうしのランク戦の記録**（対戦した両者の識別子と、対戦時に表示された王国名・使った編成） | 不正な操作の検出と問い合わせ対応のため。対戦相手の記録でもあるため | 期限なし |
+| **CPU とのランク戦の記録**（あなたの識別子・使った編成。王国名は含みません） | 不正な操作の検出と問い合わせ対応のため | 期限なし |
+| **途中で無効になった人どうしのランク戦の記録**（両者の識別子と王国名） | 対局の後始末のため | 7日 |
+| **通報した相手と以後マッチングしないための記録**（双方の識別子のみ） | 通報した相手と再び組まれないようにするため | 期限なし |
+| **友だち対戦の相手側の記録**（あなたの識別子のみ） | 相手の記録であるため | 期限なし |
 | **退会した時刻の記録** | 退会の直後に残高が作り直されるのを防ぐため | 期限なし |
 | **通報の記録**（通報されたときの王国名・識別子・投稿の本文） | 通報への対応のため | 対応が終わるまで |
 | **ロビーチャットの投稿の写し**（本文と識別子） | 通報に備えるため | 最長7日（投稿そのものは24時間で自動的に削除） |
 
-友だち対戦の記録のうち、あなた側のものは削除されます。CPU とのランク戦の記録は、退会とは関係なく7日で自動的に削除されます。
+友だち対戦の記録のうち、あなた側のものは削除されます。
 
 詳しくは [プライバシーポリシー](./) をご覧ください。
 
@@ -92,11 +96,15 @@ by email.
 
 | Data | Why it is kept | Retention |
 |---|---|---|
-| **Records of ranked matches between players** (both players' identifiers, the kingdom names shown during the match, and the teams used) | They are also your opponent's records and are used to review reports | No time limit |
+| **Records of ranked matches between players** (both players' identifiers, the kingdom names shown during the match, and the teams used) | To detect cheating and respond to inquiries; they are also your opponent's records | No time limit |
+| **Records of ranked matches against the CPU** (your identifier and the team used; no kingdom name) | To detect cheating and respond to inquiries | No time limit |
+| **Records of player-vs-player ranked matches that were voided midway** (both identifiers and kingdom names) | To clean up the match | 7 days |
+| **The record used to keep you from being matched with someone you reported** (both identifiers only) | So you are not matched with them again | No time limit |
+| **Your opponent's friend match records** (your identifier only) | They are your opponent's records | No time limit |
 | **The time you deleted your account** | To prevent your balance from being recreated immediately afterwards | No time limit |
 | **Report records** (the kingdom name, identifier and post text at the time of a report) | To handle the report | Until the report has been handled |
 | **Copies of lobby chat posts** (text and identifier) | In case of reports | Up to 7 days (posts themselves are deleted automatically after 24 hours) |
 
-Your side of friend match records is deleted. Records of ranked matches against the CPU are deleted automatically after 7 days, regardless of account deletion.
+Your side of friend match records is deleted.
 
 See the [Privacy Policy](./) for details.
