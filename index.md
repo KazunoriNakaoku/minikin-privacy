@@ -7,7 +7,7 @@ description: ミニマムキングダム（Minimum Kingdom）のプライバシ�
 
 **ミニマムキングダム（Minimum Kingdom）**
 
-最終更新日: 2026年9月15日
+最終更新日: 2026年9月25日
 
 ---
 
@@ -86,7 +86,8 @@ Google のサービス（Firebase・AdMob）は、その仕組み上、端末ご
 - **獲得したアイコン・フレーム・ユニット**（重複の判定と、引けるものが
   残っているかの表示に使います）
 - **ガチャを引いた回数**（不具合の調査と統計のために記録します）
-- 国家戦力（レート）と対戦の記録（対局の手順・勝敗・日時）
+- 国家戦力（レート）と対戦の記録（対局の手順・勝敗・日時。人どうしのランク戦では、
+  対戦した両者の王国名と使った編成も含みます）
 - 対戦中の接続状態（在席）
 
 対戦の記録は、不正な操作の検出と問い合わせ対応のために保存します。
@@ -143,12 +144,17 @@ Google のサービス（Firebase・AdMob）は、その仕組み上、端末ご
 
 #### 退会（データの削除）
 
-「その他」→「アカウント設定」→「退会」から、アカウントとサーバー上の
+「その他」→「アカウント設定」→「アカウントを削除」から、アカウントとサーバー上の
 データを削除できます。上記の「利用状況の集計」のうち、個人と結び付くもの
 （日付ごとの回数・初めて記録が届いた日・使ったことがあるかの印）も
-このとき削除されます。ただし**対戦の記録は、対戦相手側の記録でもあるため
-削除の対象になりません**（匿名の識別子のみが残ります）。また、退会の直後に
+このとき削除されます。ただし**ランク戦（オンライン対戦）の記録は、不正な操作の
+検出と問い合わせ対応のため削除の対象になりません**。記録には対戦した側の識別子と
+使った編成が期限を定めず残り、人どうしの対戦では対戦時に表示された両者の王国名も
+残ります（対戦相手側の記録でもあるためです）。通報した相手と以後マッチングしない
+ための記録（双方の識別子のみ）も残ります。また、退会の直後に
 残高が作り直されるのを防ぐため、**退会した時刻の記録**が残ります。
+削除されるもの・残るものの一覧と、アプリから削除できない場合の依頼方法は
+[アカウントとデータの削除](./account-deletion.html) をご覧ください。
 
 #### 交流（ロビーチャット）
 
@@ -205,7 +211,9 @@ Google のサービス（Firebase・AdMob）は、その仕組み上、端末ご
 - 通報した相手とは、以後ランダムマッチングされません
 - 運営が不適切と判断した表示名は、予告なく既定の名前へ変更することがあります
 
-通報に関する記録は、対応と再発防止のため一定期間保存します。
+通報に関する記録は、対応と再発防止のため保存します。通報された内容の写しは
+対応の完了まで、以後マッチングしないための記録（双方の識別子のみ）は期限を定めず
+保存します。
 
 ### 6. 広告について
 
@@ -335,7 +343,8 @@ server together with:
   duplicates and to show whether anything is left to draw)
 - the **number of gacha draws you have made** (recorded for
   troubleshooting and statistics)
-- your rating and match records (moves, results, timestamps)
+- your rating and match records (moves, results, timestamps; for ranked
+  matches between players, also both players' kingdom names and teams)
 - your connection status during a match
 
 Match records are retained to detect cheating and to respond to inquiries.
@@ -401,14 +410,20 @@ advertising or promotion.
 
 #### Account deletion
 
-From "その他" → "アカウント設定" → "退会" you can delete your account and
-your data on the server. This also removes the parts of the usage
-statistics above that are linked to you (the per-day counts, the
-first-recorded date, and the feature flags). **Match records are not
-deleted**, because they
-are also the records of your opponents; only the anonymous identifier
-remains in them. A record of **when you deleted your account** is also
-kept, to prevent your balance from being recreated immediately after.
+From "その他" → "アカウント設定" → "アカウントを削除" (Delete account) you can
+delete your account and your data on the server. This also removes the parts
+of the usage statistics above that are linked to you (the per-day counts, the
+first-recorded date, and the feature flags). **Records of ranked (online)
+matches are not deleted**, as they are used to detect cheating and to respond
+to inquiries. They keep the identifiers of the players and the teams used,
+with no time limit; for matches between players they also keep both players'
+kingdom names shown during the match (they are also your opponents' records).
+The record used to keep you from being matched with someone you reported
+(both identifiers only) is also kept.
+A record of **when you deleted your account** is also kept, to prevent your
+balance from being recreated immediately after. For the full list of what is
+deleted and kept, and how to request deletion if you cannot use the app, see
+[Account & Data Deletion](./account-deletion.html).
 
 #### Exchange (lobby chat)
 
@@ -471,7 +486,9 @@ Safeguards for inappropriate display names:
 - display names judged inappropriate may be reset to a default name
   without prior notice
 
-Reports are retained for a limited period to handle and prevent misuse.
+Reports are retained to handle and prevent misuse: copies of the reported
+content until the report has been handled, and the record used to keep the two
+players from being matched again (both identifiers only) with no time limit.
 
 ### 6. Advertising
 
