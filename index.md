@@ -7,7 +7,7 @@ description: ミニマムキングダム（Minimum Kingdom）のプライバシ�
 
 **ミニマムキングダム（Minimum Kingdom）**
 
-最終更新日: 2026年9月25日
+最終更新日: 2026年10月4日
 
 ---
 
@@ -63,7 +63,7 @@ Google のサービス（Firebase・AdMob）は、その仕組み上、端末ご
 以下は利用者の端末内に保存され、アプリを削除すると消去されます。
 
 - CPU対戦の勝利回数（難易度ごと）
-- 出陣コスト（スタミナ）の残量と回復時刻
+- 出陣コスト（スタミナ）の残量と回復時刻（全回復のお知らせのため、全回復する時刻だけはサーバーにも送ります。後述の「お知らせ」）
 - チーム編成の内容
 - ユニットの解放の進捗
 - 王国名（表示名）とアプリの初回設定が済んだかどうかの印
@@ -169,9 +169,10 @@ Google のサービス（Firebase・AdMob）は、その仕組み上、端末ご
 対戦募集と応募には**チーム編成の内容**も保存されますが、一覧には表示されず、
 対戦が成立した時点で相手に渡ります（通常の対戦と同じ扱いです）。
 
-投稿は**24時間で自動的に削除**されます（最新100件のみ保持）。削除された
-投稿についても、通報への対応のため本文の写しをサーバー内部で最長7日間
-保存します（他の利用者には表示されません）。投稿が通報された場合は、
+投稿は**最新100件のみ保持**され、古い投稿から順に自動的に削除されます。削除された
+投稿についても、通報への対応のため本文の写しをサーバー内部で、投稿から7日間か、
+投稿が表示されている間の、どちらか長いほう保存します（他の利用者には表示されません）。
+王国名・アイコンを変えると、表示中のあなたの投稿の表示も変わります。投稿が通報された場合は、
 本文の写しを通報記録として対応の完了まで保存し、完了後に削除します。
 投稿そのものに利用者の識別子（uid）は含まれません（uid の代わりに、
 投稿者ごとに固定の匿名の印を含みます）。**通報対応のための写しには uid を
@@ -183,17 +184,29 @@ Google のサービス（Firebase・AdMob）は、その仕組み上、端末ご
 
 #### お知らせ（プッシュ通知）
 
-対戦相手を募集すると、アプリを閉じているあいだに申し込みが届いたことを
-お知らせできます。このために、**端末ごとの通知用の識別子**
-（Firebase Cloud Messaging のトークン）をサーバーへ保存します。
+アプリを閉じているあいだに、次のことをお知らせできます。
 
-- 通知の許可は**募集を出すときにお尋ねします**。許可しなくても募集は
-  できます（お知らせが届かないだけです）。端末の設定からいつでも
-  変更できます
+- 対戦の募集に申し込みが届いたとき
+- 無料ガチャが引けるようになったとき・スタミナが全回復したとき
+- 交流が盛り上がっているとき（最後に交流を見てから、ほかの利用者の発言が
+  いくつか届いたとき）
+
+このために、次の情報をサーバーへ保存します。
+
+- **端末ごとの通知用の識別子**（Firebase Cloud Messaging のトークン）。
+  退会のときに削除し、30日間更新のないものは自動的に削除します
+- **無料ガチャが次に引ける時刻・スタミナが次に全回復する時刻**（お知らせを
+  送る時刻を知るため）。時刻が来てお知らせを送ると削除します
+- **あなたが交流で最後に見た発言の番号と、見た時刻、最後に盛り上がりの
+  お知らせを送った時刻**（発言の内容や、だれの発言かは保存しません）。
+  通知を許可していない場合も、交流を開くと保存します。退会のときに削除し、
+  30日間交流を開かなかった場合は自動的に削除します
+
+- 通知の許可は、ホーム画面に初めて来たとき・設定の画面・対戦の募集を出すとき
+  にお尋ねします。許可しなくても遊べます（お知らせが届かないだけです）。
+  端末の設定からいつでも変更できます
 - お知らせの文面に**王国名やメッセージの内容は含めません**
-  （「対戦の申し込みが来ています」の固定の文です）
-- 通知用の識別子は、退会のときに削除します。また30日間更新のないものは
-  自動的に削除します
+  （「対戦の申し込みが来ています」などの固定の文です）
 - 広告・宣伝の目的では利用しません
 
 ### 5. 王国名（表示名）について
@@ -316,7 +329,7 @@ The following is stored on your device and removed when you delete the
 App.
 
 - Number of wins against the CPU (per difficulty)
-- Remaining deployment cost (stamina) and its recovery time
+- Remaining deployment cost (stamina) and its recovery time (only the time of full recovery is also sent to the server, for the notification; see "Push notifications")
 - Your team composition
 - Your unit unlock progress
 - Your kingdom name (display name) and whether initial setup is complete
@@ -441,9 +454,11 @@ Recruit posts and applications also store your **team composition**. It is
 not shown in the lobby; it reaches your opponent when the match starts,
 just as in an ordinary match.
 
-Posts are **automatically deleted after 24 hours** (only the latest 100
-are kept). A server-internal copy of each post's text is retained for up
-to 7 days to handle reports (it is not shown to other players). If a
+Only the **latest 100 posts are kept**; older posts are deleted
+automatically. A server-internal copy of each post's text is retained
+for 7 days after posting or while the post is displayed, whichever is
+longer, to handle reports (it is not shown to other players). If you change your kingdom
+name or icon, your posts currently shown are updated too. If a
 post is reported, a copy of its text is kept in the report record until
 the report has been handled, after which it is deleted. Posts themselves
 do not contain your identifier (uid); they contain a fixed anonymous
@@ -456,17 +471,33 @@ deletion. You are asked to agree to the usage rules on first use.
 
 #### Push notifications
 
-When you recruit an opponent, we can notify you that someone applied
-while the app is closed. For this purpose a **per-device notification
-identifier** (a Firebase Cloud Messaging token) is stored on the server.
+While the app is closed, we can notify you when:
 
-- Permission is requested **when you post a recruitment**. You can post
-  without granting it (you simply will not be notified), and you can
-  change it any time in your device settings
+- someone applies to your recruitment for a match
+- a free gacha becomes available, or your stamina is fully recovered
+- the lobby is lively (several posts by other players have arrived since you
+  last viewed the lobby)
+
+For this purpose the following is stored on the server:
+
+- **A per-device notification identifier** (a Firebase Cloud Messaging
+  token). It is deleted when you delete your account, and any identifier not
+  refreshed for 30 days is removed automatically
+- **When your next free gacha becomes available and when your stamina will
+  be fully recovered** (to know when to notify you). Each is deleted once the
+  time comes and the notification is sent
+- **The number of the last lobby post you viewed, when you viewed it, and
+  when we last sent you a lively-lobby notification** (not the content of any
+  post, nor who wrote it). This is stored when you open the lobby even if you
+  have not allowed notifications. It is deleted when you delete your account,
+  and removed automatically if you do not open the lobby for 30 days
+
+- Permission is requested when you first reach the home screen, in the
+  settings screen, and when you post a recruitment. You can play without
+  granting it (you simply will not be notified), and you can change it any
+  time in your device settings
 - The notification text contains **no kingdom name and no message
-  content** (it is the fixed text "対戦の申し込みが来ています")
-- The identifier is deleted when you delete your account, and any
-  identifier not refreshed for 30 days is removed automatically
+  content** (it is a fixed sentence such as "対戦の申し込みが来ています")
 - It is never used for advertising or promotion.
 
 ### 5. Kingdom name (display name)

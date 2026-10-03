@@ -38,6 +38,7 @@ description: ミニマムキングダム（Minimum Kingdom）のアカウント�
 - 連携したときに保存した引き継ぎ用のデータ（勝利回数・編成など）
 - 利用状況の集計のうち、あなたと結び付くもの
 - お知らせ（プッシュ通知）のための端末の識別子
+- 交流で最後に見た発言の記録（盛り上がりのお知らせ用）
 - アプリ内に保存されているデータ
 
 ### 削除されずに残るデータ
@@ -51,7 +52,9 @@ description: ミニマムキングダム（Minimum Kingdom）のアカウント�
 | **友だち対戦の相手側の記録**（あなたの識別子のみ） | 相手の記録であるため | 期限なし |
 | **退会した時刻の記録** | 退会の直後に残高が作り直されるのを防ぐため | 期限なし |
 | **通報の記録**（通報されたときの王国名・識別子・投稿の本文） | 通報への対応のため | 対応が終わるまで |
-| **ロビーチャットの投稿の写し**（本文と識別子） | 通報に備えるため | 最長7日（投稿そのものは24時間で自動的に削除） |
+| **ロビーチャットの投稿の写し**（本文と識別子） | 通報に備えるため | 投稿から7日間か、投稿が表示されている間の、どちらか長いほう |
+| **交流の投稿そのもの**（本文・投稿したときの王国名とアイコン） | 他の利用者の画面に表示されているため | 新しい投稿に押し出されるまで（最新100件のみ保持） |
+| **無料ガチャ・スタミナのお知らせ用の時刻**（あなたの識別子と時刻のみ） | お知らせを送るため | その時刻が来るまで |
 
 友だち対戦の記録のうち、あなた側のものは削除されます。
 
@@ -90,6 +93,7 @@ by email.
 - Transfer data saved when you linked your account (wins, team, etc.)
 - The parts of the usage statistics linked to you
 - The device identifier used for push notifications
+- The record of the last lobby post you viewed (for lively-lobby notifications)
 - Data stored in the app
 
 ### Data that is kept
@@ -103,7 +107,9 @@ by email.
 | **Your opponent's friend match records** (your identifier only) | They are your opponent's records | No time limit |
 | **The time you deleted your account** | To prevent your balance from being recreated immediately afterwards | No time limit |
 | **Report records** (the kingdom name, identifier and post text at the time of a report) | To handle the report | Until the report has been handled |
-| **Copies of lobby chat posts** (text and identifier) | In case of reports | Up to 7 days (posts themselves are deleted automatically after 24 hours) |
+| **Copies of lobby chat posts** (text and identifier) | In case of reports | 7 days after posting or while the post is displayed, whichever is longer |
+| **Your lobby posts themselves** (text, and the kingdom name and icon at the time) | They are shown on other players' screens | Until pushed out by newer posts (only the latest 100 are kept) |
+| **Times for free-gacha and stamina notifications** (your identifier and the time only) | To send the notification | Until that time comes |
 
 Your side of friend match records is deleted.
 
